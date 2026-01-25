@@ -1,0 +1,466 @@
+/* Landing Page Styles - Vanilla CSS */
+
+:root {
+    --primary-gradient: linear-gradient(to right, #9333ea, #db2777);
+    /* purple-600 to pink-600 */
+    --bg-gradient: linear-gradient(to bottom right, #0f172a, #581c87, #0f172a);
+    /* slate-900 via purple-900 to slate-900 */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-color: #ffffff;
+    --text-muted: #d1d5db;
+    /* gray-300 */
+}
+
+/* Container & Layout */
+.landing-container {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-gradient);
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--text-color);
+}
+
+.landing-content {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+    .landing-content {
+        padding: 0 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .landing-content {
+        padding: 0 2rem;
+    }
+}
+
+.landing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 80rem;
+    /* 7xl */
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .landing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Hero Section */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    animation: fade-in-up 0.8s ease-out;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background: linear-gradient(to right, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    backdrop-filter: blur(4px);
+    color: #d8b4fe;
+    /* purple-300 */
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status-dot-container {
+    position: relative;
+    display: flex;
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.status-dot-ping {
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 9999px;
+    background-color: #c084fc;
+    opacity: 0.75;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.status-dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: #a855f7;
+}
+
+.hero-title {
+    font-size: 3.75rem;
+    /* 6xl */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+@media (min-width: 640px) {
+    .hero-title {
+        font-size: 4.5rem;
+        /* 7xl */
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: 6rem;
+        /* 8xl */
+    }
+}
+
+.hero-gradient-text-1 {
+    background: linear-gradient(to right, #ffffff, #e9d5ff, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+.hero-gradient-text-2 {
+    background: linear-gradient(to right, #c084fc, #f472b6, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.625;
+}
+
+@media (min-width: 640px) {
+    .hero-description {
+        font-size: 1.5rem;
+    }
+}
+
+.highlight {
+    color: #c084fc;
+    font-weight: 500;
+}
+
+/* Buttons */
+.cta-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    justify-content: flex-start;
+}
+
+.btn-base {
+    position: relative;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    border: none;
+}
+
+@media (min-width: 640px) {
+    .btn-base {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+    }
+}
+
+.btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    border: 2px solid rgba(192, 132, 252, 0.3);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-glass:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+    border-color: rgba(192, 132, 252, 0.5);
+}
+
+/* Trust Indicators */
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    padding-top: 2rem;
+}
+
+.trust-card {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.trust-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(192, 132, 252, 0.3);
+    transform: scale(1.05) translateY(-4px);
+}
+
+.trust-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .trust-icon {
+        font-size: 1.875rem;
+    }
+}
+
+.trust-card:hover .trust-icon {
+    transform: scale(1.1);
+}
+
+.trust-text {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0;
+}
+
+@media (min-width: 640px) {
+    .trust-text {
+        font-size: 0.75rem;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes bounce-slow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+/* Background Blobs */
+.bg-blob {
+    position: absolute;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    filter: blur(40px);
+    opacity: 0.2;
+    animation: blob 7s infinite;
+}
+
+.blob-purple {
+    top: 0;
+    left: -1rem;
+    background-color: #a855f7;
+}
+
+.blob-yellow {
+    top: 0;
+    right: -1rem;
+    background-color: #eab308;
+    animation-delay: 2s;
+}
+
+.blob-pink {
+    bottom: -2rem;
+    left: 5rem;
+    background-color: #ec4899;
+    animation-delay: 4s;
+}
+
+/* Utility Animations */
+.animate-fade-in-right {
+    animation: fade-in-right 0.8s ease-out;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-twinkle {
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.delay-1000 {
+    animation-delay: 1s;
+}
+
+.delay-2000 {
+    animation-delay: 2s;
+}
+
+.delay-3000 {
+    animation-delay: 3s;
+}
