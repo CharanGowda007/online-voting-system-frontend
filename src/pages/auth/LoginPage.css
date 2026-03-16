@@ -109,14 +109,15 @@
     color: transparent;
 }
 
-/* Form Styles */
-.ant-form-item-label>label {
+/* Form Styles - scoped to login page only to prevent bleeding into other forms */
+.login-container .ant-form-item-label>label {
     color: #e5e7eb !important;
     /* gray-200 */
 }
 
-.ant-input,
-.ant-input-password {
+.login-container .ant-input,
+.login-container .ant-input-affix-wrapper,
+.login-container .ant-input-password {
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     color: white !important;
@@ -124,27 +125,40 @@
     border-radius: 8px;
 }
 
-.ant-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+.login-container .ant-input::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
 }
 
-.ant-input:hover,
-.ant-input:focus,
-.ant-input-password:hover,
-.ant-input-password:focus-within {
+.login-container .ant-input:hover,
+.login-container .ant-input:focus,
+.login-container .ant-input-affix-wrapper:hover,
+.login-container .ant-input-affix-wrapper:focus-within,
+.login-container .ant-input-password:hover,
+.login-container .ant-input-password:focus-within {
     border-color: #a855f7 !important;
     background: rgba(255, 255, 255, 0.08) !important;
 }
 
-.ant-input-password .ant-input {
-    /* Fix inner input of password field */
+.login-container .ant-input-affix-wrapper .ant-input,
+.login-container .ant-input-password .ant-input {
     background: transparent !important;
     border: none !important;
     padding: 0;
+    color: white !important;
 }
 
-.ant-input-suffix {
+.login-container .ant-input-prefix,
+.login-container .ant-input-suffix {
     color: rgba(255, 255, 255, 0.5);
+}
+
+/* Fix for browser autofill background changing to white */
+.login-container .ant-input:-webkit-autofill,
+.login-container .ant-input:-webkit-autofill:hover, 
+.login-container .ant-input:-webkit-autofill:focus, 
+.login-container .ant-input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 .login-btn {

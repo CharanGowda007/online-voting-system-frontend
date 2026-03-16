@@ -110,15 +110,16 @@
     color: transparent;
 }
 
-/* Form Styles */
-.ant-form-item-label>label {
+/* Form Styles - scoped to register page only */
+.register-container .ant-form-item-label>label {
     color: #e5e7eb !important;
     /* gray-200 */
 }
 
-.ant-input,
-.ant-input-password,
-.ant-picker {
+.register-container .ant-input,
+.register-container .ant-input-affix-wrapper,
+.register-container .ant-input-password,
+.register-container .ant-picker {
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     color: white !important;
@@ -126,28 +127,42 @@
     border-radius: 8px;
 }
 
-.ant-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+.register-container .ant-input::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
 }
 
-.ant-input:hover,
-.ant-input:focus,
-.ant-input-password:hover,
-.ant-input-password:focus-within,
-.ant-picker:hover,
-.ant-picker-focused {
+.register-container .ant-input:hover,
+.register-container .ant-input:focus,
+.register-container .ant-input-affix-wrapper:hover,
+.register-container .ant-input-affix-wrapper:focus-within,
+.register-container .ant-input-password:hover,
+.register-container .ant-input-password:focus-within,
+.register-container .ant-picker:hover,
+.register-container .ant-picker-focused {
     border-color: #a855f7 !important;
     background: rgba(255, 255, 255, 0.08) !important;
 }
 
-.ant-input-password .ant-input {
+.register-container .ant-input-affix-wrapper .ant-input,
+.register-container .ant-input-password .ant-input {
     background: transparent !important;
     border: none !important;
     padding: 0;
+    color: white !important;
 }
 
-.ant-input-suffix {
+.register-container .ant-input-prefix,
+.register-container .ant-input-suffix {
     color: rgba(255, 255, 255, 0.5);
+}
+
+/* Fix for browser autofill background changing to white */
+.register-container .ant-input:-webkit-autofill,
+.register-container .ant-input:-webkit-autofill:hover,
+.register-container .ant-input:-webkit-autofill:focus,
+.register-container .ant-input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 .register-btn {

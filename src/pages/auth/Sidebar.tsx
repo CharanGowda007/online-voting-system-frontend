@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import {
     UserAddOutlined,
     UserDeleteOutlined,
     EditOutlined,
     BarChartOutlined,
     CalendarOutlined,
+    LogoutOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { AuthService } from '../../services/auth.service';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -29,7 +32,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-    getItem(<Link to="/register">New Voter Registration</Link>, '1', <UserAddOutlined />),
+    getItem(<Link to="/dashboard/voter-registration">New Voter Registration</Link>, '1', <UserAddOutlined />),
     getItem('Deletion Voter', '2', <UserDeleteOutlined />),
     getItem('Correction of Voter', '3', <EditOutlined />),
     getItem('Election Results', '4', <BarChartOutlined />),
@@ -37,10 +40,16 @@ const items: MenuItem[] = [
 ];
 
 const Sidebar: React.FC = () => {
+    const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+
+    const handleLogout = () => {
+        AuthService.logout();
+        navigate('/');
+    };
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -54,7 +63,16 @@ const Sidebar: React.FC = () => {
                 />
             </Sider>
             <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer }} />
+                <Header style={{ padding: '0 24px', background: colorBgContainer, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <Button 
+                        type="primary" 
+                        danger 
+                        icon={<LogoutOutlined />} 
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </Button>
+                </Header>
                 <Content style={{ margin: '0 16px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'Admin' }, { title: 'Dashboard' }]} />
                     <div
@@ -65,7 +83,7 @@ const Sidebar: React.FC = () => {
                             borderRadius: borderRadiusLG,
                         }}
                     >
-                        Hello
+                        <Outlet />
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

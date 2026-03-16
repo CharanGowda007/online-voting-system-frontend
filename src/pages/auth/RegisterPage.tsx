@@ -1,23 +1,32 @@
-import React from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
-import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined, SafetyOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { LockOutlined, PhoneOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { AuthService } from '../../services/auth.service';
 import './RegisterPage.css';
 
 export default function RegisterPage() {
     const navigate = useNavigate();
     const [form] = Form.useForm();
 
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
-        message.success('Registration successful! Please login.');
-        navigate('/login');
+    const onFinish = async (values: any) => {
+        try {
+            await AuthService.register({
+                mobile: values.mobile,
+                password: values.password
+            });
+            message.success('Registration successful! Please login.');
+            navigate('/login');
+        } catch (error: any) {
+            let errorMsg = error.response?.data?.message || "Registration failed. Please try again.";
+            if (Array.isArray(errorMsg)) errorMsg = errorMsg[0];
+            message.error(errorMsg);
+        }
     };
 
     return (
         <div className="register-container">
             {/* Background Ambience */}
-            <div className="bg-blob blob-purple"></div>
+            <div className="bg-blob blob-white"></div>
             <div className="bg-blob blob-pink"></div>
 
             {/* Back Button */}
@@ -42,45 +51,21 @@ export default function RegisterPage() {
                     scrollToFirstError
                 >
                     <Form.Item
-                        name="fullName"
-                        rules={[{ required: true, message: 'Please enter your Full Name!' }]}
-                    >
-                        <Input
-                            prefix={<UserOutlined />}
-                            placeholder="Full Name"
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="email"
+                        name="mobile"
                         rules={[
-                            { type: 'email', message: 'The input is not valid E-mail!' },
-                            { required: true, message: 'Please enter your E-mail!' },
+                            { required: true, message: 'Please enter your Mobile Number!' },
+                            { pattern: /^[0-9]{10}$/, message: 'Mobile number must be exactly 10 digits!' }
                         ]}
                     >
                         <Input
-                            prefix={<MailOutlined />}
-                            placeholder="Email Address"
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="phone"
-                        rules={[{ required: true, message: 'Please enter your Phone Number!' }]}
-                    >
-                        <Input
                             prefix={<PhoneOutlined />}
-                            placeholder="Phone Number"
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="voterId"
-                        rules={[{ required: true, message: 'Please enter your Voter ID!' }]}
-                    >
-                        <Input
-                            prefix={<SafetyOutlined />}
-                            placeholder="Voter ID Number"
+                            placeholder="Mobile Number"
+                            maxLength={10}
+                            onKeyPress={(e) => {
+                                if (!/[0-9]/.test(e.key)) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                     </Form.Item>
 

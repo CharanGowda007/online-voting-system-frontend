@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
+import { Storage } from '../../utils/storage-util';
 import {
   UserAddOutlined,
   UserDeleteOutlined,
@@ -40,6 +41,13 @@ const items: MenuItem[] = [
 export default function LandingPage() {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    const token = Storage.local.get("TimeSheet-authenticationToken") || Storage.session.get("TimeSheet-authenticationToken");
+    if (token) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
 
   // We won't use the theme token for background because we want to preserve the gradient
   // But we'll keep the layout structure

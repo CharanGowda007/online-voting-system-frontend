@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Form,
     Input,
@@ -11,10 +11,9 @@ import {
     message,
     Checkbox,
     Row,
-    Col,
-    Space
+    Col
 } from 'antd';
-import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 

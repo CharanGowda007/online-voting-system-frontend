@@ -3,8 +3,8 @@ import { Storage } from "../utils/storage-util";
 
 const TIMEOUT = 1 * 60 * 1000;
 axios.defaults.timeout = TIMEOUT;
-axios.defaults.baseURL = 'http://localhost:3000';
-//axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+
 axios.defaults.withCredentials = true;
 
 // Placeholder for setLoading

@@ -1,18 +1,30 @@
-import React from 'react';
 import { Card, Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { AuthService } from '../../services/auth.service';
+import { Storage } from '../../utils/storage-util';
 import './LoginPage.css';
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const [form] = Form.useForm();
 
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
-        message.success('Login successful! (Simulated)');
-        // Navigate to dashboard or home on success
-        navigate('/');
+    const onFinish = async (values: any) => {
+        try {
+            const response = await AuthService.login({
+                mobile: values.identifier,
+                password: values.password
+            });
+            // Try different common token keys from NestJS responses
+            const token = response.accessToken || response.token || response.access_token;
+            if (token) {
+                Storage.local.set("TimeSheet-authenticationToken", token);
+            }
+            message.success('Login successful!');
+            navigate('/dashboard');
+        } catch (error: any) {
+            message.error(error.response?.data?.message || "Login failed. Please try again.");
+        }
     };
 
     return (
@@ -46,11 +58,23 @@ export default function LoginPage() {
                         name="identifier"
                         rules={[
                             { required: true, message: 'Please enter your Email or Phone Number!' },
+                            { 
+                                validator: (_, value) => {
+                                    if (!value) return Promise.resolve();
+                                    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                                    const isPhone = /^[0-9]{10}$/.test(value);
+                                    if (!isEmail && !isPhone) {
+                                        return Promise.reject(new Error('Must be a valid email or 10-digit phone number!'));
+                                    }
+                                    return Promise.resolve();
+                                }
+                            }
                         ]}
                     >
                         <Input
                             prefix={<UserOutlined />}
                             placeholder="Email or Phone Number"
+                            maxLength={50} // 50 to accommodate emails, but phone logic remains governed by regex
                         />
                     </Form.Item>
 
