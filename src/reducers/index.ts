@@ -4,6 +4,7 @@ import masterCountryReducer from './masters/masterCountry.reducer';
 import masterStateReducer from './masters/masterState.reducer';
 import masterPCReducer from './masters/masterPC.reducer';
 import masterACReducer from './masters/masterAC.reducer';
+import dashboardReducer from './dashboard.reducer';
 
 // Auth slice defined inline to avoid module resolution issues with separate file
 const authSlice = createSlice({
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
     masterState: masterStateReducer,
     masterPC: masterPCReducer,
     masterAC: masterACReducer,
+    dashboard: dashboardReducer,
 });

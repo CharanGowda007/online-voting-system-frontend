@@ -8,6 +8,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import Sidebar from './pages/auth/Sidebar';
 import VoterRegistrationForm from './pages/voter-pages/VoterRegistrationForm';
+import DashboardPage from './pages/dashboard/DashboardPage';
 import setupAxiosInterceptors from './config/axios-interceptor';
 import './index.css';
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <Sidebar />,
     children: [
+      {
+        index: true,
+        element: <DashboardPage />,
+      },
       {
         path: 'voter-registration',
         element: <VoterRegistrationForm />,

@@ -7,6 +7,7 @@ import {
     BarChartOutlined,
     CalendarOutlined,
     LogoutOutlined,
+    DashboardOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
@@ -32,6 +33,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
+    getItem(<Link to="/dashboard">Dashboard</Link>, 'dashboard', <DashboardOutlined />),
     getItem(<Link to="/dashboard/voter-registration">New Voter Registration</Link>, '1', <UserAddOutlined />),
     getItem('Deletion Voter', '2', <UserDeleteOutlined />),
     getItem('Correction of Voter', '3', <EditOutlined />),
