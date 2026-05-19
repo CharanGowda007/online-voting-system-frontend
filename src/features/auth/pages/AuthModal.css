@@ -1,0 +1,292 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.2s ease;
+}
+
+.auth-modal {
+  background: rgba(13, 5, 39, 0.97) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  border-radius: 18px !important;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  animation: slide-up 0.25s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.auth-modal::-webkit-scrollbar {
+  width: 4px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+.modal-header-premium {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.modal-icon-premium {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  margin: 0 auto 12px;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.4);
+}
+
+.modal-title-premium {
+  color: #f1f5f9 !important;
+  margin-bottom: 4px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.modal-sub-premium {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* Custom Tabs */
+.login-tabs-premium .ant-tabs-nav {
+  margin-bottom: 20px !important;
+}
+
+.login-tabs-premium .ant-tabs-nav::before {
+  display: none;
+}
+
+.login-tabs-premium .ant-tabs-nav-list {
+  display: flex;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9px;
+  padding: 3px;
+}
+
+.login-tabs-premium .ant-tabs-tab {
+  flex: 1;
+  justify-content: center;
+  padding: 7px 0 !important;
+  margin: 0 !important;
+  border-radius: 7px !important;
+  color: #64748b !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s;
+  background: transparent !important;
+}
+
+.login-tabs-premium .ant-tabs-tab-active {
+  background: rgba(139, 92, 246, 0.28) !important;
+}
+
+.login-tabs-premium .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #a78bfa !important;
+}
+
+.login-tabs-premium .ant-tabs-ink-bar {
+  display: none !important;
+}
+
+/* Inputs */
+.auth-form-premium .ant-form-item-label > label {
+  font-size: 11px !important;
+  color: #64748b !important;
+  margin-bottom: 5px !important;
+  height: auto !important;
+}
+
+.auth-form-premium .ant-form-item {
+  margin-bottom: 14px !important;
+}
+
+.field-input-premium {
+  height: 40px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+  border-radius: 9px !important;
+  font-size: 12.5px !important;
+  color: white !important;
+}
+
+.field-input-premium:focus,
+.field-input-premium-focused {
+  border-color: #8b5cf6 !important;
+  box-shadow: none !important;
+}
+
+.input-icon-premium {
+  color: #475569;
+  font-size: 14px;
+}
+
+/* Auth form wrapper fix for passwords */
+.auth-form-premium .ant-input-affix-wrapper {
+  height: 40px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+  border-radius: 9px !important;
+  padding: 0 12px !important;
+}
+
+.auth-form-premium .ant-input-affix-wrapper-focused,
+.auth-form-premium .ant-input-affix-wrapper:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: none !important;
+}
+
+.auth-form-premium .ant-input,
+.auth-form-premium input {
+  background: transparent !important;
+  color: #f1f5f9 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Fix for browser autofill background */
+.auth-form-premium input:-webkit-autofill,
+.auth-form-premium input:-webkit-autofill:hover, 
+.auth-form-premium input:-webkit-autofill:focus, 
+.auth-form-premium input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1a162e inset !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.auth-form-premium .ant-form-item-has-error .ant-input-affix-wrapper,
+.auth-form-premium .ant-form-item-has-error .field-input-premium {
+  border-color: #ef4444 !important;
+}
+
+/* Checkbox and links */
+.login-options-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  margin-top: -6px;
+}
+
+.checkbox-premium {
+  color: #64748b !important;
+  font-size: 11.5px;
+}
+
+.checkbox-premium .ant-checkbox-inner {
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  background: transparent !important;
+}
+
+.checkbox-premium .ant-checkbox-checked .ant-checkbox-inner {
+  background: #8b5cf6 !important;
+  border-color: #8b5cf6 !important;
+}
+
+.forgot-link-premium {
+  color: #8b5cf6;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+/* Submit */
+.submit-btn-premium {
+  width: 100%;
+  padding: 12px !important;
+  height: auto !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899) !important;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35) !important;
+  border: none !important;
+  margin-bottom: 14px;
+}
+
+.login-footer-premium {
+  text-align: center;
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.link-text-premium {
+  color: #a78bfa !important;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.muted-text-premium {
+  color: #64748b;
+  font-size: 11.5px;
+  font-style: italic;
+}
+
+/* Captcha Styling */
+.captcha-wrapper-premium {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 9px;
+  padding: 0 4px 0 0;
+  height: 40px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.captcha-svg-premium {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9; /* Match backend svg rect color */
+  border-radius: 7px 0 0 7px;
+  padding: 2px;
+}
+
+.captcha-svg-premium svg {
+  width: 100%;
+  height: 100%;
+  max-width: 120px;
+}
+
+.captcha-reload-premium {
+  color: #8b5cf6 !important;
+  padding: 0 6px !important;
+  font-size: 16px !important;
+  height: auto !important;
+  margin-left: 2px;
+}
+
+.captcha-reload-premium:hover {
+  color: #a78bfa !important;
+}
