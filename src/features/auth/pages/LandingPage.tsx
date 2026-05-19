@@ -92,38 +92,38 @@ export default function LandingPage() {
                     <div className="nav-list">
                         <div className="nav-item active" onClick={() => navigate('/')}>
                             <AppstoreOutlined className="nav-icon" />
-                            <span className="nav-label">Dashboard</span>
+                            {!collapsed && <span className="nav-label">Dashboard</span>}
                         </div>
                         <div className="nav-item" onClick={() => openModal('register')}>
                             <UserAddOutlined className="nav-icon" />
-                            <span className="nav-label">New Voter Reg.</span>
-                            <span className="nav-badge badge-new">New</span>
+                            {!collapsed && <span className="nav-label">New Voter Reg.</span>}
+                            {!collapsed && <span className="nav-badge badge-new">New</span>}
                         </div>
                         <div className="nav-item">
                             <UserDeleteOutlined className="nav-icon" />
-                            <span className="nav-label">Delete Voter</span>
+                            {!collapsed && <span className="nav-label">Delete Voter</span>}
                         </div>
                         <div className="nav-item">
                             <EditOutlined className="nav-icon" />
-                            <span className="nav-label">Voter Correction</span>
+                            {!collapsed && <span className="nav-label">Voter Correction</span>}
                         </div>
                         <div className="nav-item">
                             <BarChartOutlined className="nav-icon" />
-                            <span className="nav-label">Election Results</span>
-                            <span className="nav-badge badge-live">Live</span>
+                            {!collapsed && <span className="nav-label">Election Results</span>}
+                            {!collapsed && <span className="nav-badge badge-live">Live</span>}
                         </div>
                         <div className="nav-item">
                             <CalendarOutlined className="nav-icon" />
-                            <span className="nav-label">Upcoming Elections</span>
-                            <span className="nav-badge badge-num">3</span>
+                            {!collapsed && <span className="nav-label">Upcoming Elections</span>}
+                            {!collapsed && <span className="nav-badge badge-num">3</span>}
                         </div>
                         <div className="nav-item" style={{ marginTop: 'auto' }}>
                             <SettingOutlined className="nav-icon" />
-                            <span className="nav-label">Settings</span>
+                            {!collapsed && <span className="nav-label">Settings</span>}
                         </div>
                         <div className="nav-item" onClick={() => openModal('login_staff')}>
                             <LogoutOutlined className="nav-icon" style={{ color: '#ef4444' }} />
-                            <span className="nav-label" style={{ color: '#ef4444' }}>Staff Login</span>
+                            {!collapsed && <span className="nav-label" style={{ color: '#ef4444' }}>Staff Login</span>}
                         </div>
                     </div>
                     <button className="collapse-btn" onClick={() => setCollapsed(!collapsed)}>

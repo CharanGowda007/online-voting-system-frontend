@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { Button, Avatar } from 'antd';
+import { Button, Avatar, Modal, Popover } from 'antd';
 import {
     UserAddOutlined,
     UserDeleteOutlined,
@@ -70,6 +70,7 @@ const Sidebar: React.FC = () => {
     const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
     const [userRole, setUserRole] = useState<string>('USER');
+    const [userInfo, setUserInfo] = useState<{ id: string; name: string } | null>(null);
 
     useEffect(() => {
         // Check sessionStorage first (tab-specific), then localStorage
@@ -81,6 +82,13 @@ const Sidebar: React.FC = () => {
                 const payload = JSON.parse(atob(token.split('.')[1]));
                 const role = payload.auth || payload.role || payload.userType || 'USER';
                 setUserRole(role);
+
+                // Extract User ID and Name
+                const id = payload.loginId || payload.userId || 'N/A';
+                const firstName = payload.firstName || '';
+                const lastName = payload.lastName || '';
+                const name = firstName ? `${firstName} ${lastName}`.trim() : (payload.role || 'User');
+                setUserInfo({ id, name });
             } catch (e) {
                 console.error("Error decoding token", e);
             }
@@ -93,9 +101,33 @@ const Sidebar: React.FC = () => {
     const navItems = getNavItems(userRole);
 
     const handleLogout = () => {
-        AuthService.logout();
-        navigate('/');
+        Modal.confirm({
+            title: 'Logout Confirmation',
+            content: 'Are you sure you want to logout?',
+            okText: 'Yes, Logout',
+            cancelText: 'Cancel',
+            okButtonProps: { danger: true },
+            onOk: () => {
+                AuthService.logout();
+                navigate('/');
+            }
+        });
     };
+
+    const popoverContent = (
+        <div className="user-popover-content" style={{ padding: '4px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div>
+                    <span style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>Name</span>
+                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#f1f5f9' }}>{userInfo?.name || 'N/A'}</div>
+                </div>
+                <div style={{ borderTop: '1px solid rgba(139, 92, 246, 0.1)', paddingTop: '8px' }}>
+                    <span style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>User ID</span>
+                    <div style={{ fontSize: '13px', fontFamily: 'monospace', color: '#a78bfa' }}>{userInfo?.id || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+    );
 
     return (
         <div className="landing-wrapper" style={{ overflow: 'hidden' }}>
@@ -126,7 +158,7 @@ const Sidebar: React.FC = () => {
                                     onClick={() => navigate(item.path)}
                                 >
                                     {React.cloneElement(item.icon as React.ReactElement<any>, { className: 'nav-icon' })}
-                                    <span className="nav-label">{item.label}</span>
+                                    {!collapsed && <span className="nav-label">{item.label}</span>}
                                     {item.badge && !collapsed && (
                                         <span className={`nav-badge badge-${item.badge.toLowerCase()}`}>{item.badge}</span>
                                     )}
@@ -136,7 +168,7 @@ const Sidebar: React.FC = () => {
                         
                         <div className="nav-item" style={{ marginTop: 'auto' }} onClick={handleLogout}>
                             <LogoutOutlined className="nav-icon" style={{ color: '#ef4444' }} />
-                            <span className="nav-label" style={{ color: '#ef4444' }}>Logout</span>
+                            {!collapsed && <span className="nav-label" style={{ color: '#ef4444' }}>Logout</span>}
                         </div>
                     </div>
                     <button className="collapse-btn" onClick={() => setCollapsed(!collapsed)}>
@@ -156,12 +188,20 @@ const Sidebar: React.FC = () => {
                             <Button type="text" className="icon-btn" style={{ color: '#64748b' }}>
                                 <BellOutlined />
                             </Button>
-                            <div className="user-chip">
-                                <Avatar size="small" style={{ background: 'linear-gradient(135deg, #8b5cf6, #ec4899)' }}>
-                                    {userRole.charAt(0)}
-                                </Avatar>
-                                <span>{userRole === 'APPLICANT' ? 'Applicant' : 'Administrator'}</span>
-                            </div>
+                            <Popover 
+                                content={popoverContent} 
+                                title={null} 
+                                trigger="click" 
+                                placement="bottomRight"
+                                overlayClassName="user-popover-premium"
+                            >
+                                <div className="user-chip">
+                                    <Avatar size="small" style={{ background: 'linear-gradient(135deg, #8b5cf6, #ec4899)' }}>
+                                        {userRole.charAt(0)}
+                                    </Avatar>
+                                    <span>{userRole === 'APPLICANT' ? 'Applicant' : 'Administrator'}</span>
+                                </div>
+                            </Popover>
                         </div>
                     </div>
 

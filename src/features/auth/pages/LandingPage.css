@@ -90,7 +90,7 @@
   transition: all 0.2s ease;
   position: relative;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .nav-item:hover {
@@ -129,7 +129,12 @@
   font-size: 13.5px;
   font-weight: 500;
   color: #94a3b8;
-  transition: color 0.2s;
+  transition: color 0.2s, opacity 0.2s ease, max-width 0.2s ease;
+  opacity: 1;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .nav-item.active .nav-label {
@@ -567,4 +572,50 @@
   .features-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Collapsed sidebar: center everything and hide labels */
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 12px 0;
+  gap: 0;
+}
+
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .nav-badge {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.sidebar.collapsed .logo-area {
+  justify-content: center;
+  padding: 20px 0;
+  gap: 0;
+}
+
+.sidebar.collapsed .logo-text-wrap {
+  display: none;
+}
+
+.sidebar.collapsed .nav-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* User Popover styling */
+.user-popover-premium .ant-popover-inner {
+  background: #0d0527 !important;
+  border: 1px solid rgba(139, 92, 246, 0.4) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+  padding: 12px 16px !important;
+}
+
+.user-popover-premium .ant-popover-arrow::after {
+  background: #0d0527 !important;
 }
